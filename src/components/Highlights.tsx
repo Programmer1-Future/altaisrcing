@@ -50,8 +50,8 @@ export default function Highlights() {
     {
       icon: Award,
       number: '3rd',
-      label: 'Regional Finish 2024',
-      description: 'Proclass regionals debut'
+      label: 'Regional Finish 2026',
+      description: '3rd place in Proclass'
     },
     {
       icon: Trophy,
@@ -75,6 +75,12 @@ export default function Highlights() {
 
   const milestones = [
     {
+      year: '2026',
+      title: '3rd Place at Regionals (Proclass)',
+      description:
+        'Achieved 3rd place at Regionals in the Professional class, marking a major step forward for the team and strengthening our push toward nationals and the World Finals.'
+    },
+    {
       year: '2025',
       title: 'Professional Class Advancement',
       description:
@@ -82,9 +88,9 @@ export default function Highlights() {
     },
     {
       year: '2024',
-      title: '3rd Place at Regionals (Proclass)',
+      title: '3rd Place at Regionals',
       description:
-        'Achieved an impressive 3rd place finish at the Regional Championship in the Professional class, proving our competitive edge and laying the foundation for future success.'
+        'Strong debut finish in development class, laying the foundation for future success and ambitious goals.'
     },
     {
       year: '2024',

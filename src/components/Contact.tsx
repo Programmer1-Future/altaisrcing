@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { Mail, Send, CheckCircle, AlertCircle, Handshake } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import type { ContactFormData } from '../lib/supabase';
 
@@ -234,9 +234,7 @@ export default function Contact() {
               <div className="bg-gradient-to-br from-[#01123D] to-[#012051] rounded-2xl p-6 text-[#FFFFFE] shadow-xl">
                 <div className="flex items-start gap-4">
                   <div className="w-14 h-14 rounded-lg bg-[#FFFFFE] flex items-center justify-center text-[#01123D] font-bold">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 12l8-6M12 12l8 6M12 12L4 6m8 6l-8 6" />
-                    </svg>
+                    <Handshake className="w-7 h-7" />
                   </div>
                   <div className="flex-1">
                     <h4 className="text-lg font-bold mb-2">Partnership Opportunities</h4>
