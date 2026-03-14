@@ -239,7 +239,15 @@ export default function Contact() {
                   <div className="flex-1">
                     <h4 className="text-lg font-bold mb-2">Partnership Opportunities</h4>
                     <p className="text-[#FFFFFE]/80 mb-4">We offer tailored sponsorship packages to support our engineering and competition goals. Download our deck to explore tiers and benefits, or contact our partnerships team to discuss a custom package.</p>
-                    <div className="flex gap-3">
+                    <div className="flex flex-wrap gap-3">
+                      <a 
+                        href="/Sponsorship Tiers.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="border border-[#FFFFFE]/30 text-[#FFFFFE] px-4 py-2 rounded-full font-semibold hover:bg-[#FFFFFE]/6 transition-colors"
+                      >
+                        Download Deck
+                      </a>
                       <button onClick={scrollToForm} className="bg-[#FFFFFE] text-[#01123D] px-4 py-2 rounded-full font-semibold hover:scale-105 transition-transform">Contact Partnerships</button>
                     </div>
                   </div>
