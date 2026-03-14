@@ -20,6 +20,10 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
+      if (!supabase) {
+        throw new Error('Contact form is not configured yet. Please try again later.');
+      }
+
       const { error: supabaseError } = await supabase
         .from('contact_submissions')
         .insert([
