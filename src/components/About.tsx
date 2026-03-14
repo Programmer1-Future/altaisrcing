@@ -1,10 +1,73 @@
-import { Target, Users, Lightbulb } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { Target, Users, Lightbulb, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useInView } from '../hooks/useInView';
+
+const galleryImages = [
+  {
+    src: '/brand/car-with-sponsors.png',
+    alt: 'Altais Racing car with sponsor logos on a road',
+    caption: 'Our sponsor-branded race car showcase'
+  },
+  {
+    src: '/team-photos/regionals.jpg',
+    alt: 'Altais Racing team at regional event',
+    caption: 'Competition moments from regionals'
+  },
+  {
+    src: '/team-photos/teamphoto2.jpeg',
+    alt: 'Altais Racing team portrait',
+    caption: 'The team behind Altais Racing'
+  }
+];
 
 export default function About() {
   const photo = useInView<HTMLDivElement>({ threshold: 0.4 });
   const text = useInView<HTMLDivElement>({ threshold: 0.4 });
   const icons = useInView<HTMLDivElement>({ threshold: 0.3 });
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [isGalleryPaused, setIsGalleryPaused] = useState(false);
+  const touchStartX = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (isGalleryPaused) {
+      return;
+    }
+
+    const intervalId = window.setInterval(() => {
+      setActiveImageIndex((prev) => (prev + 1) % galleryImages.length);
+    }, 4500);
+
+    return () => window.clearInterval(intervalId);
+  }, [isGalleryPaused]);
+
+  const showNextImage = () => {
+    setActiveImageIndex((prev) => (prev + 1) % galleryImages.length);
+  };
+
+  const showPreviousImage = () => {
+    setActiveImageIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+  };
+
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    touchStartX.current = event.touches[0]?.clientX ?? null;
+  };
+
+  const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (touchStartX.current === null) {
+      return;
+    }
+
+    const deltaX = (event.changedTouches[0]?.clientX ?? 0) - touchStartX.current;
+    const swipeThreshold = 40;
+
+    if (deltaX > swipeThreshold) {
+      showPreviousImage();
+    } else if (deltaX < -swipeThreshold) {
+      showNextImage();
+    }
+
+    touchStartX.current = null;
+  };
 
   return (
     <section id="about" className="py-20 md:py-32 bg-[#FFFFFE]">
@@ -88,15 +151,65 @@ export default function About() {
 
           {/* Car showcase with sponsors */}
           <div className="mt-16">
-            <div className="rounded-2xl overflow-hidden shadow-2xl">
-              <img
-                src="/brand/car-with-sponsors.png"
-                alt="Altais Racing car with sponsor logos on a road"
-                className="w-full object-cover hover:scale-[1.02] transition-transform duration-700"
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).style.display = 'none';
-                }}
-              />
+            <div
+              className="relative rounded-2xl overflow-hidden shadow-2xl"
+              onMouseEnter={() => setIsGalleryPaused(true)}
+              onMouseLeave={() => setIsGalleryPaused(false)}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+            >
+              <div className="relative aspect-video bg-[#01123D]">
+                {galleryImages.map((image, index) => (
+                  <img
+                    key={image.src}
+                    src={image.src}
+                    alt={image.alt}
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+                      index === activeImageIndex ? 'opacity-100' : 'opacity-0'
+                    }`}
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).style.display = 'none';
+                    }}
+                  />
+                ))}
+
+                <div className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-black/70 to-transparent text-center">
+                  <p className="text-white text-sm md:text-base">
+                    {galleryImages[activeImageIndex].caption}
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={showPreviousImage}
+                  aria-label="Previous gallery image"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/35 text-white backdrop-blur-sm border border-white/20 hover:bg-black/55 transition-colors"
+                >
+                  <ChevronLeft className="w-5 h-5 mx-auto" />
+                </button>
+                <button
+                  type="button"
+                  onClick={showNextImage}
+                  aria-label="Next gallery image"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/35 text-white backdrop-blur-sm border border-white/20 hover:bg-black/55 transition-colors"
+                >
+                  <ChevronRight className="w-5 h-5 mx-auto" />
+                </button>
+              </div>
+
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2">
+                {galleryImages.map((image, index) => (
+                  <button
+                    key={`${image.src}-dot`}
+                    type="button"
+                    aria-label={`Go to image ${index + 1}`}
+                    onClick={() => setActiveImageIndex(index)}
+                    className={`h-2.5 rounded-full transition-all ${
+                      index === activeImageIndex ? 'w-6 bg-[#7EC8FF]' : 'w-2.5 bg-white/55 hover:bg-white/80'
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>

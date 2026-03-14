@@ -146,12 +146,12 @@ export default function Highlights() {
                     <h4 className="text-2xl font-bold mb-2">Partner With Us</h4>
                     <p className="text-[#FFFFFE]/80 mb-4">Invest in the future of motorsport and engineering. Explore our newly released partnership packages featuring exclusive brand visibility and unique benefits.</p>
                     <div className="flex gap-3">
-                      <button 
-                        onClick={() => document.getElementById('partnership')?.scrollIntoView({ behavior: 'smooth' })}
-                        className="bg-yellow-400 text-[#01123D] px-6 py-2 rounded-full font-bold hover:bg-yellow-300 transition-colors shadow-md"
+                      <a
+                        href="#partnership"
+                        className="bg-[#7EC8FF] text-[#01123D] px-6 py-2 rounded-full font-bold hover:bg-[#9BD7FF] transition-colors shadow-md"
                       >
                         View Sponsorship Tiers
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>

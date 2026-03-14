@@ -1,5 +1,4 @@
 import { FileText, ArrowRight, Check } from 'lucide-react';
-import { useEffect } from 'react';
 import useInView from '../hooks/useInView';
 
 const tiers = [
@@ -93,18 +92,18 @@ export default function Partnership() {
                 key={index}
                 className={`relative flex flex-col rounded-2xl p-6 transition-transform transform hover:-translate-y-2 hover:scale-[1.02] shadow-xl ${
                   tier.featured 
-                    ? 'bg-gradient-to-b from-[#1a2f63] to-[#01123D] border-2 border-yellow-400' 
+                    ? 'bg-gradient-to-b from-[#1a2f63] to-[#01123D] border-2 border-[#7EC8FF]' 
                     : 'bg-[#FFFFFE]/5 backdrop-blur-sm border border-[#FFFFFE]/15'
                 }`}
               >
                 {tier.featured && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-[#01123D] px-4 py-1 rounded-full text-sm font-black tracking-wider uppercase">
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-[#7EC8FF] text-[#01123D] px-4 py-1 rounded-full text-sm font-black tracking-wider uppercase">
                     Premium Partner
                   </div>
                 )}
                 
                 <h3 className="text-2xl font-bold text-[#FFFFFE] mb-2 mt-2">{tier.name}</h3>
-                <div className="text-xl font-bold text-yellow-400 mb-6 pb-6 border-b border-[#FFFFFE]/10">
+                <div className="text-xl font-bold text-[#7EC8FF] mb-6 pb-6 border-b border-[#FFFFFE]/10">
                   {tier.price}
                 </div>
                 
@@ -121,7 +120,7 @@ export default function Partnership() {
                   onClick={scrollToContact}
                   className={`w-full py-3 rounded-xl font-bold transition-all ${
                     tier.featured
-                      ? 'bg-yellow-400 text-[#01123D] hover:bg-yellow-300 shadow-[0_0_20px_rgba(250,204,21,0.3)]'
+                      ? 'bg-[#7EC8FF] text-[#01123D] hover:bg-[#9BD7FF] shadow-[0_0_20px_rgba(126,200,255,0.35)]'
                       : 'bg-[#FFFFFE]/10 text-[#FFFFFE] hover:bg-[#FFFFFE]/20'
                   }`}
                 >

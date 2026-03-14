@@ -2,6 +2,7 @@ interface Sponsor {
   name: string;
   imagePath?: string; // Optional for now until you add the actual images
   website?: string;   // Optional sponsor website URL
+  imageClassName?: string;
 }
 
 export default function Sponsors() {
@@ -32,7 +33,8 @@ export default function Sponsors() {
     },
     {
       name: 'Aircold Panel Solutions',
-      imagePath: '/sponsors/aircold.png'
+      imagePath: '/sponsors/aircold.png',
+      imageClassName: 'p-0 scale-125'
     }
   ];
 
@@ -62,7 +64,7 @@ export default function Sponsors() {
                     <img 
                       src={sponsor.imagePath} 
                       alt={`${sponsor.name} logo`}
-                      className="w-full h-full object-contain p-4"
+                      className={`w-full h-full object-contain p-4 transition-transform ${sponsor.imageClassName ?? ''}`}
                     />
                   </div>
                 ) : (
